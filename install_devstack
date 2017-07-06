@@ -1,13 +1,13 @@
 sudo useradd -s /bin/bash -d /opt/stack -m stack
 echo "stack ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/stack
 sudo su - stack
-apt-get update
-apt-get install git
-apt-get install python-pip
-pip install --upgrade pip
-pip install -U os-testr
-apt-get install ebtables
-apt-get install bridge-utils
+sudo apt-get update
+sudo apt-get install git
+sudo apt-get install python-pip
+sudo pip install --upgrade pip
+sudo pip install -U os-testr
+sudo apt-get install ebtables
+sudo apt-get install bridge-utils
 git clone https://git.openstack.org/openstack-dev/devstack
 cd devstack
 
