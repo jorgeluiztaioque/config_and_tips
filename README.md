@@ -1,1 +1,2 @@
-# vimrc_for_programers
+Config and tips for everybody
+
