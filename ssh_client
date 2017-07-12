@@ -1,4 +1,4 @@
-trictHostKeyChecking no
+StrictHostKeyChecking no
 Host *
 SendEnv LANG LC_*
 HashKnownHosts yes
