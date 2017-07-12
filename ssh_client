@@ -1,0 +1,9 @@
+trictHostKeyChecking no
+Host *
+SendEnv LANG LC_*
+HashKnownHosts yes
+GSSAPIAuthentication yes
+GSSAPIDelegateCredentials no
+Ciphers aes128-ctr,aes192-ctr,aes256-ctr,arcfour256,arcfour128,aes128-cbc,3des-cbc
+HostKeyAlgorithms ssh-rsa,ssh-dss
+MACs hmac-md5,hmac-sha1,hmac-ripemd160
