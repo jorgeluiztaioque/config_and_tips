@@ -1,0 +1,1 @@
+cat file.log | perl -pe 's/(\d+)/localtime($1)/e'
