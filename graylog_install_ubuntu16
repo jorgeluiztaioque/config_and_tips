@@ -1,0 +1,82 @@
+##################################
+# INSTALAND O JAVA
+##################################
+apt install software-properties-common
+add-apt-repository -y ppa:webupd8team/java
+apt update
+apt-get install -y oracle-java8-installer
+
+##################################
+# INSTALANDO ELASTICSEARCH
+##################################
+wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | apt-key add -
+echo "deb https://packages.elastic.co/elasticsearch/2.x/debian stable main" | tee -a /etc/apt/sources.list.d/elasticsearch.list
+apt-get update 
+apt-get install -y elasticsearch
+
+# CONFIGURANDO O ELASTIC
+vim /etc/elasticsearch/elasticsearch.yml
+cluster.name: graylog
+script.inline: false
+script.indexed: false
+script.file: false
+
+# CONFIGURANDO PARA INICIAR E INICIAR
+systemctl enable elasticsearch.service
+systemctl start elasticsearch.service
+
+#TESTE
+curl -X GET http://localhost:9200
+
+##################################
+# INSTALANDO O MONGODB
+##################################
+apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
+echo "deb http://repo.mongodb.org/apt/debian wheezy/mongodb-org/3.2 main" | tee /etc/apt/sources.list.d/mongodb-org.list
+apt update
+apt-get install -y mongodb-org
+systemctl enable mongod
+systemctl start mongod
+
+
+##################################
+# INSTALANDO O ELASTICSEARCH
+##################################
+wget https://packages.graylog2.org/repo/packages/graylog-2.2-repository_latest.deb
+dpkg -i graylog-2.2-repository_latest.deb
+apt-get install -y apt-transport-https
+apt-get update
+apt-get install -y graylog-server
+
+# INSTALANDO PWGEN
+apt-get install -y pwgen
+pwgen -N 1 -s 96
+uFlcW8lufhtmiYfKK3khTMKb1EPwqAgnxzgj5i1XvXAkeZv74aqQil2Uz8DUJSk8SWRexMhko5tthwTBNqVb6kKFQkfcLoYH
+
+# CRIANDO SENHA CRIPTOGRAFADA
+echo -n 1234 | sha256sum
+03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4
+
+# CONFIGURPANDO O GRAYLOG
+vim /etc/graylog/server/server.conf
+is_master = true
+password_secret = CHAVE
+root_password_sha2 = HASH_SENHA
+root_timezone = UTC
+elasticsearch_discovery_zen_ping_unicast_hosts = 127.0.0.1:9300
+elasticsearch_max_docs_per_index = 20000000
+elasticsearch_max_number_of_indices = 20
+elasticsearch_shards = 1
+rest_listen_uri = http://0.0.0.0:12900/
+web_listen_uri = http://0.0.0.0:9000/
+
+# CONFIGURANDO E REINICIADO OS SERVIÇOS
+systemctl daemon-reload
+systemctl enable graylog-server.service
+systemctl start graylog-server.service
+
+# VERIFICANDO LOGS DE INICIALIZAÇÃO
+tail -f /var/log/graylog-server/server.log
+
+# TESTE
+http://ip_do_gray_log:9000
