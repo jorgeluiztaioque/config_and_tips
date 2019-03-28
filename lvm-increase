@@ -1,0 +1,42 @@
+
+fdisk -l 
+
+fdisk /dev/xvda
+
+delete partition
+
+create a new with the size 
+
+do not delete signature
+
+change the type to (8e) linux LVM
+
+# linux understand new size
+partx -u /dev/xvda
+
+# check de size
+pvdisplay 
+
+#resize
+pvresize /dev/xvda1
+
+# check again
+pvdisplay 
+
+# check size of your volumes
+lvdisplay
+
+# Extend
+lvextend -L +100G /dev/LvmGroup1/VAR
+
+# check disck
+df -h
+
+# resise EXT
+resize2fs /dev/LvmGroup1/VAR
+
+# check again
+df -h
+
+And reboot de machine to check if everything is ok after boot
+
