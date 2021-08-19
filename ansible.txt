@@ -1,0 +1,2 @@
+ansible group -m ping --extra-vars "ansible_user=user ansible_password=123456"
+ansible group -m shell -a "contaclientes.sh" --extra-vars "ansible_user=user ansible_password=123456"
