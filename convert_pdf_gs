@@ -1,0 +1,16 @@
+gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dDownsampleColorImages=true -dColorImageResolution=150 -dNOPAUSE  -dBATCH -sOutputFile=imput.pdf output.pdf
+
+gs  -q -dNOPAUSE -dBATCH -dSAFER \
+    -sDEVICE=pdfwrite \
+    -dCompatibilityLevel=1.4 \
+    -dPDFSETTINGS=/ebook \
+    -dEmbedAllFonts=true \
+    -dSubsetFonts=true \
+    -dColorImageDownsampleType=/Bicubic \
+    -dColorImageResolution=60 \
+    -dGrayImageDownsampleType=/Bicubic \
+    -dGrayImageResolution=60 \
+    -dMonoImageDownsampleType=/Bicubic \
+    -dMonoImageResolution=60 \
+    -sOutputFile=imput.pdf \
+     output.pdf
