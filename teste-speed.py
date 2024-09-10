@@ -121,7 +121,7 @@ def webpages():
 
         count = count+1
 
-def mtr():
+#def mtr():
     # mtr -4 -n -r -c3 -w -b -p -j google.com
     # mtr -4 -n -r -c3 -w -b google.com
 
