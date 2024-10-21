@@ -17,7 +17,7 @@ zabbix = "172.26.12.29"
 host = "PB-A01-LEP001-SP"
 
 sleepTime = randint(1,15)*30
-syslog.syslog("sleep "+sleepTime)
+syslog.syslog("sleep "+str(sleepTime))
 sleep(sleepTime)
 
 
@@ -141,3 +141,5 @@ dns()
 icmp()
 speedTest()
 webpages()
+
+
