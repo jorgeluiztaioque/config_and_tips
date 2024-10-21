@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# Version 3.1
+# Version 3.2
 
 import subprocess
 from subprocess import getoutput
@@ -9,10 +9,17 @@ import requests
 import time
 import urllib3
 import syslog
+from random import randint
+from time import sleep
 urllib3.disable_warnings()
 
 zabbix = "172.26.12.29"
 host = "PB-A01-LEP001-SP"
+
+sleepTime = randint(1,10)*30
+syslog.syslog("sleep "+sleepTime)
+sleep(sleepTime)
+
 
 domains = {   
         "google": "google.com", 
@@ -134,5 +141,3 @@ dns()
 icmp()
 speedTest()
 webpages()
-
-
