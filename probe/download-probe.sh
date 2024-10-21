@@ -9,5 +9,6 @@ echo "$1" | sudo -S chmod +x teste-speed.py
 echo "$1" | sudo -S wget https://raw.githubusercontent.com/jorgeluiztaioque/config_and_tips/refs/heads/master/probe/pppoe-connect.sh
 echo "$1" | sudo -S chmod +x pppoe-connect.sh
 crontab -r
-sudo echo "*/15 * * * * /opt/teste-speed.py" | crontab -
-sudo crontab -l | { cat; echo "*/5 * * * * /opt/pppoe-connect.sh"; } | crontab -
+sudo crontab -r
+echo "*/15 * * * * /opt/teste-speed.py" | crontab -
+crontab -l | { cat; echo "*/5 * * * * /opt/pppoe-connect.sh"; } | crontab -
