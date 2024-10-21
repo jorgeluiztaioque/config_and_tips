@@ -13,3 +13,5 @@ crontab -r
 sudo crontab -r
 echo "*/15 * * * * /opt/teste-speed.py" | crontab -
 crontab -l | { cat; echo "*/5 * * * * /opt/pppoe-connect.sh"; } | crontab -
+varHostname=$(hostname)
+sudo sed -i "s/PB-A01-LEP001-SP/$varHostname/" /opt/teste-speed.py
