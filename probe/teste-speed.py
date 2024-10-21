@@ -141,5 +141,3 @@ dns()
 icmp()
 speedTest()
 webpages()
-
-
