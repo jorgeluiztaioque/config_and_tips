@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# Version 3
+# Version 3.1
 
 import subprocess
 from subprocess import getoutput
@@ -8,6 +8,7 @@ import json
 import requests
 import time
 import urllib3
+import syslog
 urllib3.disable_warnings()
 
 zabbix = "172.26.12.29"
@@ -37,6 +38,7 @@ def dns():
     for key, value in keys.items():
         command = f"zabbix_sender -z {zabbix} -s {host} -k {key} -o {value}"
         #print (command)
+        syslog.syslog(command)
         process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     
 
@@ -56,6 +58,7 @@ def speedTest():
     for key, value in keys.items():
         command = f"zabbix_sender -z {zabbix} -s {host} -k {key} -o {value}"
         #print (command)
+        syslog.syslog(command)
         process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
 
@@ -92,6 +95,7 @@ def icmp():
         for key, value in keys.items():
             command = f"zabbix_sender -z {zabbix} -s {host} -k {key} -o {value}"
             #print (command)
+            syslog.syslog(command)
             process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
         count = count+1
@@ -117,6 +121,7 @@ def webpages():
         for key, value in keys.items():
             command = f"zabbix_sender -z {zabbix} -s {host} -k {key} -o {value}"
             #print (command)
+            syslog.syslog(command)
             process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
         count = count+1
