@@ -11,7 +11,7 @@ echo "$1" | sudo -S wget https://raw.githubusercontent.com/jorgeluiztaioque/conf
 echo "$1" | sudo -S chmod +x pppoe-connect.sh
 crontab -r
 sudo crontab -r
-echo "*/15 * * * * /opt/teste-speed.py" | crontab -
-crontab -l | { cat; echo "*/5 * * * * /opt/pppoe-connect.sh"; } | crontab -
+echo "$1" | sudo -S echo "*/15 * * * * /opt/teste-speed.py" | sudo crontab -
+echo "$1" | sudo -S crontab -l | { cat; echo "*/5 * * * * /opt/pppoe-connect.sh"; } | sudo crontab -
 varHostname=$(hostname)
 sudo sed -i "s/PB-A01-LEP001-SP/$varHostname/" /opt/teste-speed.py
