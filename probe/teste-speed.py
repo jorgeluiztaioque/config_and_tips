@@ -50,7 +50,7 @@ def dns():
     
 
 def speedTest():
-    command="speedtest -s 31991 --format=json"
+    command="speedtest --accept-license --accept-gdpr -s 31991 --format=json"
     resSpeedtest = getoutput(command)
     JresSpeedtest = json.loads(resSpeedtest)
 
