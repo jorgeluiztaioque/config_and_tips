@@ -30,7 +30,6 @@ domains = {
         "mercadolivre": "mercadolivre.com.br",
         "nubank": "nubank.com.br",
         "globo": "globo.com",
-        "uol": "uol.com.br",
         "instagran": "instagran.com"
 }
 
