@@ -75,7 +75,7 @@ def icmp():
         service = list(domains.keys())[count]
         #print (URL)
 
-        command="ping -n -q -c 5 "+URL
+        command="ping -4 -n -q -c 5 "+URL
         out = getoutput(command)
         allOut = out.split('\n')
 
