@@ -204,7 +204,8 @@ def speedTest():
     StUpload = JresSpeedtest['upload']['bandwidth']/125000
     StJitter = JresSpeedtest ['ping']['jitter']
     StLatency = JresSpeedtest ['ping']['latency']
-    keys = {service+"_st_latency": StLatency, service+"_st_download": StDownload, service+"_st_upload": StUpload, service+"_st_jitter": StJitter, "st_server": service}
+    keys = {service+"_st_latency": StLatency, service+"_st_download": StDownload, service+"_st_upload": StUpload, service+"_st_jitter": StJitter, "st_server": service,
+    "geral_st_latency": StLatency, "geral_st_download": StDownload, "geral_st_upload": StUpload, "geral_st_jitter": StJitter}
     for key, value in keys.items():
         command = f"zabbix_sender -z {zabbix} -s {host} -k {key} -o {value}"
         #print (command)
