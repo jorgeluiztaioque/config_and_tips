@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Version 2 
-# Custon 3
+# Custon 4
 
 import subprocess
 from subprocess import getoutput
@@ -186,33 +186,6 @@ def fragmentation():
         syslog.syslog(command)
         process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
-def speedTest():
-    '''
-    Realiza o testes de speed test em um servidor por vez, de maneira randomica 
-    tilizando o speedtext_cli e tras as informações de download upload latencia e jitter
-    '''
-    chaves = list(speedtest.keys())
-    chave_aleatoria = random.choice(chaves)
-    ST = speedtest[chave_aleatoria]
-
-    #print (ST)
-    service = chave_aleatoria
-    command= f"speedtest --accept-license --accept-gdpr -s {ST} --format=json"
-    resSpeedtest = getoutput(command)
-    JresSpeedtest = json.loads(resSpeedtest)
-    StDownload = JresSpeedtest['download']['bandwidth']/125000
-    StUpload = JresSpeedtest['upload']['bandwidth']/125000
-    StJitter = JresSpeedtest ['ping']['jitter']
-    StLatency = JresSpeedtest ['ping']['latency']
-    keys = {service+"_st_latency": StLatency, service+"_st_download": StDownload, service+"_st_upload": StUpload, service+"_st_jitter": StJitter, "st_server": service,
-    "geral_st_latency": StLatency, "geral_st_download": StDownload, "geral_st_upload": StUpload, "geral_st_jitter": StJitter}
-    for key, value in keys.items():
-        command = f"zabbix_sender -z {zabbix} -s {host} -k {key} -o {value}"
-        #print (command)
-        syslog.syslog(command)
-        process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-
-
 
 def icmp():
     # realiza o teste de ping icmp para destinos informados na lista [domains]
@@ -319,6 +292,31 @@ def webpagesGov():
 
         count = count+1
 
+def speedTest():
+    '''
+    Realiza o testes de speed test em um servidor por vez, de maneira randomica 
+    tilizando o speedtext_cli e tras as informações de download upload latencia e jitter
+    '''
+    chaves = list(speedtest.keys())
+    chave_aleatoria = random.choice(chaves)
+    ST = speedtest[chave_aleatoria]
+
+    #print (ST)
+    service = chave_aleatoria
+    command= f"speedtest --accept-license --accept-gdpr -s {ST} --format=json"
+    resSpeedtest = getoutput(command)
+    JresSpeedtest = json.loads(resSpeedtest)
+    StDownload = JresSpeedtest['download']['bandwidth']/125000
+    StUpload = JresSpeedtest['upload']['bandwidth']/125000
+    StJitter = JresSpeedtest ['ping']['jitter']
+    StLatency = JresSpeedtest ['ping']['latency']
+    keys = {service+"_st_latency": StLatency, service+"_st_download": StDownload, service+"_st_upload": StUpload, service+"_st_jitter": StJitter, "st_server": service,
+    "geral_st_latency": StLatency, "geral_st_download": StDownload, "geral_st_upload": StUpload, "geral_st_jitter": StJitter}
+    for key, value in keys.items():
+        command = f"zabbix_sender -z {zabbix} -s {host} -k {key} -o {value}"
+        #print (command)
+        syslog.syslog(command)
+        process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
 #def mtr():
     # mtr -4 -n -r -c3 -w -b -p -j google.com
